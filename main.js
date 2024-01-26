@@ -1,6 +1,6 @@
 let width = 12;
 let height = 12;
-let bombs = 9;
+let bombs = 10;
 let cellSize = 50;
 
 let canvas = document.getElementById("canvas");
@@ -126,4 +126,44 @@ function eachCell(fxn) {
   }
 }
 
+function gameWin () {
+    let bombsFound = 0;
+    eachCell(cell => {
+        if (cell.bomb && cell.flagged) {
+            bombsFound++;
+        }
+    });
+    return bombs == bombsFound;
+};
+
+function endGame (txt) {
+    openAll();
+    draw();
+    setTimeout(function () {
+        alert(txt);
+        window.location.reload();
+    }, 50);
+};
+
+function processUserAction (x, y, fxn) {
+    let cell = gameField[Math.floor(y/cellSize)][Math.floor(x/cellSize)];
+    let ok = fxn(cell);
+    draw();
+    if (!ok) {
+        endGame("Game over. YOU LOSE");
+    }
+    if (gameWin()) {
+        endGame("YOU WIN");   
+    }
+};
+
 draw();
+
+canvas.addEventListener("click", function (e) {
+    processUserAction(e.clientX, e.clientY, (cell) => cell.click(gameField));
+});
+
+canvas.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+    processUserAction(e.clientX, e.clientY, (cell) => cell.flag());
+});
