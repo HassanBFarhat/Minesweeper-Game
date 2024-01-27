@@ -19,8 +19,10 @@ function Cell(x, y) {
 Cell.prototype.draw = function (ctx, minefield) {
   ctx.save();
   ctx.translate(this.x * cellSize, this.y * cellSize);
-  ctx.fillStyle = this.open ? "#eee" : "#bbb";
+  ctx.fillStyle = this.open ? "#e8e8e8" : "#a6a6a6";
   ctx.fillRect(1, 1, cellSize - 2, cellSize - 2);
+  ctx.fillStyle = "#000000"
+  ctx.strokeRect(0, 0, cellSize, cellSize)
   let str = "";
   if (this.flagged) {
     ctx.fillStyle = "#00f";
