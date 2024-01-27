@@ -1,5 +1,5 @@
-let width = 12;
-let height = 12;
+let width = 9;
+let height = 9;
 let bombs = 10;
 let cellSize = 50;
 
@@ -160,10 +160,16 @@ function processUserAction (x, y, fxn) {
 draw();
 
 canvas.addEventListener("click", function (e) {
-    processUserAction(e.clientX, e.clientY, (cell) => cell.click(gameField));
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    processUserAction(mouseX, mouseY, (cell) => cell.click(gameField));
 });
 
 canvas.addEventListener("contextmenu", function (e) {
     e.preventDefault();
-    processUserAction(e.clientX, e.clientY, (cell) => cell.flag());
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    processUserAction(mouseX, mouseY, (cell) => cell.flag());
 });
