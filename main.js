@@ -8,6 +8,26 @@ canvas.width = width * cellSize;
 canvas.height = height * cellSize;
 let ctx = canvas.getContext("2d");
 
+// Loads the spritesheet
+let spritesheet = document.getElementById("spritesheet");
+
+// sprite positions (assume top left corner for coordinates)
+let spritePositions = {
+  closed: {x: 1, y: 50},
+  open: {x: 18, y: 50},
+  flagged: {x: 35, y: 50},
+  bomb: {x: 86, y: 50},
+  userHitBomb: {x: 103, y: 50},
+  one: {x: 1, y: 67},
+  two: {x: 18, y: 67},
+  three: {x: 35, y: 67},
+  four: {x: 52, y: 67},
+  five: {x: 69, y: 67},
+  six: {x: 86, y: 67},
+  seven: {x: 103, y: 67},
+  eight: {x: 120, y: 67}
+}; 
+
 function Cell(x, y) {
   this.x = x;
   this.y = y;
@@ -19,8 +39,14 @@ function Cell(x, y) {
 Cell.prototype.draw = function (ctx, minefield) {
   ctx.save();
   ctx.translate(this.x * cellSize, this.y * cellSize);
-  ctx.fillStyle = this.open ? "#e8e8e8" : "#a6a6a6";
-  ctx.fillRect(1, 1, cellSize - 2, cellSize - 2);
+
+  // Getting correct sprite for its state
+  let spritePosition = this.open ? spritePositions.open : (this.flagged ? spritePositions.flagged : spritePositions.closed);
+  ctx.drawImage(spritesheet, 1, 50, cellSize, cellSize, 0, 0, cellSize, cellSize);
+
+
+  // ctx.fillStyle = this.open ? "#e8e8e8" : "#a6a6a6";
+  // ctx.fillRect(1, 1, cellSize - 2, cellSize - 2);
   ctx.fillStyle = "#000000"
   ctx.strokeRect(0, 0, cellSize, cellSize)
   let str = "";
