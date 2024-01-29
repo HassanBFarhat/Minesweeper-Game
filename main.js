@@ -54,8 +54,10 @@ Cell.prototype.draw = function (ctx, minefield) {
 
   let str = "";
   if (this.flagged) {
-    ctx.fillStyle = "#00f";
-    str = String.fromCharCode(9873);
+    ctx.drawImage(spritesheet, spritePositions.flagged.x, spritePositions.flagged.y, 15, 15, 0, 0, cellSize, cellSize);
+
+    // ctx.fillStyle = "#00f";
+    // str = String.fromCharCode(9873);
   } else if (this.open) {
     let bombsInArea = this.cellsAroundBomb(minefield).filter(
       (c) => c.bomb
