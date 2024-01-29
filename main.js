@@ -41,8 +41,8 @@ Cell.prototype.draw = function (ctx, minefield) {
   ctx.translate(this.x * cellSize, this.y * cellSize);
 
   // Getting correct sprite for its state
-  let spritePosition = this.open ? spritePositions.open : (this.flagged ? spritePositions.flagged : spritePositions.closed);
-  ctx.drawImage(spritesheet, 1, 50, cellSize, cellSize, 0, 0, cellSize, cellSize);
+  let spritePosition = this.open ? spritePositions.open : spritePositions.closed;
+  ctx.drawImage(spritesheet, spritePosition.x, spritePosition.y, 15, 15, 0, 0, cellSize, cellSize);
 
 
   // ctx.fillStyle = this.open ? "#e8e8e8" : "#a6a6a6";
