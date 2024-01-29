@@ -49,6 +49,9 @@ Cell.prototype.draw = function (ctx, minefield) {
   // ctx.fillRect(1, 1, cellSize - 2, cellSize - 2);
   ctx.fillStyle = "#000000"
   ctx.strokeRect(0, 0, cellSize, cellSize)
+
+  ctx.imageSmoothingEnabled = false;
+
   let str = "";
   if (this.flagged) {
     ctx.fillStyle = "#00f";
