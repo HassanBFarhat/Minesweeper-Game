@@ -18,7 +18,7 @@ let spritePositions = {
   flagged: {x: 35, y: 50},
   bomb: {x: 86, y: 50},
   userHitBomb: {x: 103, y: 50},
-  one: {x: 1, y: 67},
+  one: {x: 2, y: 67},
   two: {x: 18, y: 67},
   three: {x: 35, y: 67},
   four: {x: 52, y: 67},
@@ -58,11 +58,30 @@ Cell.prototype.draw = function (ctx, minefield) {
       (c) => c.bomb
     ).length;
     if (this.bomb) {
-      ctx.fillStyle = "#f00";
-      str = "*";
+      ctx.drawImage(spritesheet, spritePositions.bomb.x, spritePositions.bomb.y, 15, 15, 0, 0, cellSize, cellSize);
+      // ctx.fillStyle = "#f00";
+      // str = "*";
     } else if (bombsInArea > 0) {
-      ctx.fillStyle = "#000";
-      str = bombsInArea;
+        if (bombsInArea == 1) {
+          ctx.drawImage(spritesheet, spritePositions.one.x, spritePositions.one.y, 15, 15, 0, 0, cellSize, cellSize);
+        } else if (bombsInArea == 2) {
+          ctx.drawImage(spritesheet, spritePositions.two.x, spritePositions.two.y, 15, 15, 0, 0, cellSize, cellSize);
+        } else if (bombsInArea == 3) {
+          ctx.drawImage(spritesheet, spritePositions.three.x, spritePositions.three.y, 15, 15, 0, 0, cellSize, cellSize);
+        } else if (bombsInArea == 4) {
+          ctx.drawImage(spritesheet, spritePositions.four.x, spritePositions.four.y, 15, 15, 0, 0, cellSize, cellSize);
+        } else if (bombsInArea == 5) {
+          ctx.drawImage(spritesheet, spritePositions.five.x, spritePositions.five.y, 15, 15, 0, 0, cellSize, cellSize);
+        } else if (bombsInArea == 6) {
+          ctx.drawImage(spritesheet, spritePositions.six.x, spritePositions.six.y, 15, 15, 0, 0, cellSize, cellSize);
+        } else if (bombsInArea == 7) {
+          ctx.drawImage(spritesheet, spritePositions.seven.x, spritePositions.seven.y, 15, 15, 0, 0, cellSize, cellSize);
+        } else {
+          ctx.drawImage(spritesheet, spritePositions.eight.x, spritePositions.eight.y, 15, 15, 0, 0, cellSize, cellSize);
+        }
+
+      // ctx.fillStyle = "#000";
+      // str = bombsInArea;
     }
   }
   ctx.textAlign = "center";
